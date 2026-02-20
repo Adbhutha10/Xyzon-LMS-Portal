@@ -184,9 +184,9 @@ const CourseDetailPage = () => {
 
                             <div className="p-8">
                                 <div className="flex items-end gap-3 mb-8">
-                                    <span className="text-4xl font-black text-ink">${course.price}</span>
-                                    <span className="text-lg text-ink-muted line-through font-bold mb-1">$199.99</span>
-                                    <span className="text-teal-600 font-black text-sm mb-1 ml-auto">55% OFF</span>
+                                    <span className="text-4xl font-black text-ink">₹{course.price}</span>
+                                    <span className="text-lg text-ink-muted line-through font-bold mb-1">₹999</span>
+                                    <span className="text-teal-600 font-black text-sm mb-1 ml-auto">LIMITED OFFER</span>
                                 </div>
 
                                 <button className="w-full py-5 bg-primary-600 text-white font-black rounded-2xl text-lg hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 mb-4">

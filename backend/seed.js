@@ -81,7 +81,7 @@ const seedStudent = async () => {
                     category: 'Development',
                     instructor: 'Sarah Jenkins',
                     duration: '48h 30m',
-                    price: 89.99,
+                    price: 499.00,
                     rating: 4.8,
                     image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800'
                 },
@@ -91,7 +91,7 @@ const seedStudent = async () => {
                     category: 'Design',
                     instructor: 'Marcus Aurelius',
                     duration: '22h 15m',
-                    price: 74.99,
+                    price: 399.00,
                     rating: 4.9,
                     image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800'
                 },
@@ -101,7 +101,7 @@ const seedStudent = async () => {
                     category: 'Data Science',
                     instructor: 'Dr. Emily Chen',
                     duration: '56h 45m',
-                    price: 99.99,
+                    price: 599.00,
                     rating: 4.7,
                     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
                 },
@@ -111,7 +111,7 @@ const seedStudent = async () => {
                     category: 'Security',
                     instructor: 'Alex Rivera',
                     duration: '35h 20m',
-                    price: 69.99,
+                    price: 449.00,
                     rating: 4.6,
                     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'
                 },
@@ -121,7 +121,7 @@ const seedStudent = async () => {
                     category: 'Marketing',
                     instructor: 'Jessica Alba',
                     duration: '28h 10m',
-                    price: 49.99,
+                    price: 299.00,
                     rating: 4.5,
                     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'
                 },
@@ -131,14 +131,36 @@ const seedStudent = async () => {
                     category: 'Business',
                     instructor: 'Michael Scott',
                     duration: '18h 40m',
-                    price: 59.99,
+                    price: 349.00,
                     rating: 4.8,
                     image: 'https://images.unsplash.com/photo-1507679799987-c7377be48656?auto=format&fit=crop&q=80&w=800'
                 }
             ]);
             console.log('Global course catalog seeded successfully!');
         } else {
-            console.log('Global course catalog already exists.');
+            // Force update all courses with new reliable images and INR prices
+            await Course.update(
+                { image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800' },
+                { where: { title: 'Full Stack Web Development' } }
+            );
+            await Course.update(
+                { image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800' },
+                { where: { title: 'UI/UX Design Fundamentals' } }
+            );
+            await Course.update(
+                { image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800' },
+                { where: { title: 'Data Structures & Algorithms' } }
+            );
+
+            // Update AvailableCourse prices
+            await AvailableCourse.update({ price: 499 }, { where: { title: 'The Complete Web Developer 2026' } });
+            await AvailableCourse.update({ price: 399 }, { where: { title: 'Advanced UI/UX Masterclass' } });
+            await AvailableCourse.update({ price: 599 }, { where: { title: 'Data Science & Machine Learning' } });
+            await AvailableCourse.update({ price: 449 }, { where: { title: 'Cybersecurity Fundamentals' } });
+            await AvailableCourse.update({ price: 299 }, { where: { title: 'Digital Marketing Excellence' } });
+            await AvailableCourse.update({ price: 349 }, { where: { title: 'Business Strategy & Leadership' } });
+
+            console.log('Sample courses already exist, updated all images and low-cost INR prices.');
         }
 
         process.exit();

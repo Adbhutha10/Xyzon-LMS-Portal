@@ -132,7 +132,7 @@ const CoursesPage = () => {
                                         <span className="text-xs font-black text-ink">{course.rating}</span>
                                     </div>
                                     <div className="absolute bottom-4 right-4 bg-primary-600 text-white px-4 py-1.5 rounded-xl font-black text-xs shadow-lg">
-                                        ${course.price}
+                                        ₹{course.price}
                                     </div>
                                 </div>
 
