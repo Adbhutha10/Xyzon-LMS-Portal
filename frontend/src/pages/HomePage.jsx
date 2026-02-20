@@ -66,9 +66,10 @@ const HomePage = () => {
                     <div className="flex items-center gap-8">
                         <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto object-contain" />
                         <div className="hidden md:flex items-center gap-6">
-                            <a href="#features" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Features</a>
-                            <a href="#categories" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Courses</a>
-                            <a href="#testimonials" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Success Stories</a>
+                            <a href="#about" className="font-bold text-sm text-ink-muted hover:text-primary-600 transition-colors">About</a>
+                            <button onClick={() => window.location.href = '/courses'} className="font-bold text-sm text-ink-muted hover:text-primary-600 transition-colors">Explore Courses</button>
+                            <a href="#faq" className="font-bold text-sm text-ink-muted hover:text-primary-600 transition-colors">FAQ</a>
+                            <a href="#testimonials" className="font-bold text-sm text-ink-muted hover:text-primary-600 transition-colors">Success Stories</a>
                         </div>
                     </div>
                     <div className="flex items-center gap-3">

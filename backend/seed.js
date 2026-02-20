@@ -1,5 +1,6 @@
 const Student = require('./models/Student');
 const Course = require('./models/Course');
+const AvailableCourse = require('./models/AvailableCourse');
 const { connectDB, sequelize } = require('./config/db');
 require('dotenv').config();
 
@@ -69,6 +70,75 @@ const seedStudent = async () => {
                 { where: { title: 'Data Structures & Algorithms' } }
             );
             console.log('Sample courses already exist, updated all images with reliable URLs.');
+        }
+
+        const availableCourseCount = await AvailableCourse.count();
+        if (availableCourseCount === 0) {
+            await AvailableCourse.bulkCreate([
+                {
+                    title: 'The Complete Web Developer 2026',
+                    description: 'Learn everything from HTML/CSS to advanced React, Node.js, and Cloud deployment.',
+                    category: 'Development',
+                    instructor: 'Sarah Jenkins',
+                    duration: '48h 30m',
+                    price: 89.99,
+                    rating: 4.8,
+                    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    title: 'Advanced UI/UX Masterclass',
+                    description: 'Master Figma, user research, and advanced prototyping techniques for mobile and web.',
+                    category: 'Design',
+                    instructor: 'Marcus Aurelius',
+                    duration: '22h 15m',
+                    price: 74.99,
+                    rating: 4.9,
+                    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    title: 'Data Science & Machine Learning',
+                    description: 'Comprehensive guide to Python, Scikit-learn, TensorFlow, and advanced data visualization.',
+                    category: 'Data Science',
+                    instructor: 'Dr. Emily Chen',
+                    duration: '56h 45m',
+                    price: 99.99,
+                    rating: 4.7,
+                    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    title: 'Cybersecurity Fundamentals',
+                    description: 'Protect systems and networks from digital attacks. Learn ethical hacking and risk management.',
+                    category: 'Security',
+                    instructor: 'Alex Rivera',
+                    duration: '35h 20m',
+                    price: 69.99,
+                    rating: 4.6,
+                    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    title: 'Digital Marketing Excellence',
+                    description: 'Boost business with SEO, Social Media, Content Marketing, and Analytics.',
+                    category: 'Marketing',
+                    instructor: 'Jessica Alba',
+                    duration: '28h 10m',
+                    price: 49.99,
+                    rating: 4.5,
+                    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    title: 'Business Strategy & Leadership',
+                    description: 'Learn to lead teams, manage projects, and scale organizations effectively.',
+                    category: 'Business',
+                    instructor: 'Michael Scott',
+                    duration: '18h 40m',
+                    price: 59.99,
+                    rating: 4.8,
+                    image: 'https://images.unsplash.com/photo-1507679799987-c7377be48656?auto=format&fit=crop&q=80&w=800'
+                }
+            ]);
+            console.log('Global course catalog seeded successfully!');
+        } else {
+            console.log('Global course catalog already exists.');
         }
 
         process.exit();
