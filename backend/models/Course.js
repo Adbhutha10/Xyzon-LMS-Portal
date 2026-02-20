@@ -27,6 +27,10 @@ const Course = sequelize.define('Course', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     studentId: {
         type: DataTypes.INTEGER,
         allowNull: false,

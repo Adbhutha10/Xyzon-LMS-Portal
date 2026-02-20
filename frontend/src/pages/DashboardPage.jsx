@@ -171,9 +171,21 @@ const DashboardPage = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
                                 {courses.map((course) => (
                                     <div key={course.id} className="bg-white border border-surface-border rounded-[2rem] overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-100/50 hover:border-primary-200 transition-all group cursor-pointer">
-                                        <div className={`h-36 bg-gradient-to-br ${course.color} relative flex items-center justify-center`}>
-                                            <BookOpen className="text-white/30 h-20 w-20" />
-                                            <div className="absolute top-4 right-4 bg-white/20 backdrop-blur px-3 py-1.5 rounded-xl flex items-center gap-1.5 border border-white/30">
+                                        <div className={`h-36 relative flex items-center justify-center overflow-hidden`}>
+                                            {course.image ? (
+                                                <>
+                                                    <img
+                                                        src={course.image}
+                                                        alt={course.title}
+                                                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    />
+                                                    <div className={`absolute inset-0 bg-gradient-to-br ${course.color} opacity-60`} />
+                                                </>
+                                            ) : (
+                                                <div className={`absolute inset-0 bg-gradient-to-br ${course.color}`} />
+                                            )}
+                                            <BookOpen className="text-white/30 h-20 w-20 relative z-10" />
+                                            <div className="absolute top-4 right-4 bg-white/20 backdrop-blur px-3 py-1.5 rounded-xl flex items-center gap-1.5 border border-white/30 z-10">
                                                 <Clock size={12} className="text-white" />
                                                 <span className="text-[10px] font-black text-white uppercase tracking-wider">{course.duration}</span>
                                             </div>
