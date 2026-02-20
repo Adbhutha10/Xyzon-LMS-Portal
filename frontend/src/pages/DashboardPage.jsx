@@ -40,12 +40,7 @@ const DashboardPage = () => {
             {/* Sidebar */}
             <aside className="w-72 border-r border-surface-border bg-white shadow-sm hidden lg:flex flex-col">
                 <div className="p-8 border-b border-surface-border">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
-                            <GraduationCap className="text-white" size={22} />
-                        </div>
-                        <span className="text-xl font-black text-ink">Xyzon <span className="text-primary-600">LMS</span></span>
-                    </div>
+                    <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto object-contain" />
                 </div>
 
                 <nav className="flex-1 px-4 py-6 space-y-2">

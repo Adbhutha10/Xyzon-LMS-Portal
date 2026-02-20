@@ -42,11 +42,8 @@ const HomePage = () => {
             {/* Navbar */}
             <nav className="bg-white/80 backdrop-blur-xl border-b border-surface-border sticky top-0 z-50 shadow-sm shadow-primary-100/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/30">
-                            <GraduationCap className="text-white" size={20} />
-                        </div>
-                        <span className="text-xl font-bold text-ink">Xyzon <span className="text-primary-600">LMS</span></span>
+                    <div className="flex items-center">
+                        <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto object-contain" />
                     </div>
                     <div className="flex items-center gap-3">
                         <Link to="/login" className="text-sm font-semibold text-ink-muted hover:text-ink transition-colors px-4 py-2">
@@ -160,7 +157,7 @@ const HomePage = () => {
                         </div>
                         <span className="font-bold text-white">Xyzon LMS</span>
                     </div>
-                    <p className="text-ink-faint text-sm font-medium">© 2025 Xyzon LMS. All rights reserved.</p>
+                    <p className="text-ink-faint text-sm font-medium">© 2025 Beere Adbhutha. All rights reserved.</p>
                 </div>
             </footer>
         </div>
