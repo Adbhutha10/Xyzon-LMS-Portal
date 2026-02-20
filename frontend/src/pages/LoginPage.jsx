@@ -33,37 +33,37 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-lms-light flex items-center justify-center p-4">
             {/* Background Blobs */}
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+            <div className="absolute top-0 -left-4 w-72 h-72 bg-lms-mint rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+            <div className="absolute top-0 -right-4 w-72 h-72 bg-lms-charon rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-lms-cascades/10 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
 
             <div className="w-full max-w-md relative">
-                <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 shadow-2xl">
+                <div className="bg-white border border-lms-mint/50 rounded-[2rem] p-10 shadow-2xl shadow-lms-charon/10">
                     <div className="text-center mb-10">
-                        <h1 className="text-3xl font-bold text-white mb-2">Student Login</h1>
-                        <p className="text-slate-400">Welcome back! Please enter your details.</p>
+                        <h1 className="text-3xl font-bold text-lms-black mb-2">Student Login</h1>
+                        <p className="text-lms-charon font-medium">Welcome back! Please enter your details.</p>
                     </div>
 
                     {error && (
-                        <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-lg mb-6 text-sm">
+                        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-2xl mb-6 text-sm font-medium">
                             {error}
                         </div>
                     )}
 
                     <form onSubmit={handleLogin} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                            <label className="block text-sm font-bold text-lms-black mb-2 px-1">Email Address</label>
                             <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-lms-charon">
                                     <User size={18} />
                                 </div>
                                 <input
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-slate-900/50 border border-slate-700 text-white pl-10 pr-4 py-3 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
+                                    className="w-full bg-lms-light/50 border border-lms-mint text-lms-black pl-11 pr-4 py-4 rounded-2xl focus:ring-4 focus:ring-lms-cascades/10 focus:border-lms-cascades transition-all outline-none placeholder:text-lms-charon/50 font-medium"
                                     placeholder="name@example.com"
                                     required
                                 />
@@ -71,16 +71,16 @@ const LoginPage = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                            <label className="block text-sm font-bold text-lms-black mb-2 px-1">Password</label>
                             <div className="relative">
-                                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-500">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-lms-charon">
                                     <Lock size={18} />
                                 </div>
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-900/50 border border-slate-700 text-white pl-10 pr-4 py-3 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
+                                    className="w-full bg-lms-light/50 border border-lms-mint text-lms-black pl-11 pr-4 py-4 rounded-2xl focus:ring-4 focus:ring-lms-cascades/10 focus:border-lms-cascades transition-all outline-none placeholder:text-lms-charon/50 font-medium"
                                     placeholder="••••••••"
                                     required
                                 />
@@ -90,7 +90,7 @@ const LoginPage = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-xl shadow-lg shadow-purple-500/20 transform transition-all active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-70"
+                            className="w-full bg-lms-black hover:bg-lms-cascades text-white font-bold py-4 rounded-2xl shadow-xl shadow-lms-black/10 transform transition-all active:scale-[0.98] flex items-center justify-center gap-2 group disabled:opacity-70"
                         >
                             {loading ? (
                                 <Loader2 className="animate-spin" size={20} />
@@ -103,9 +103,9 @@ const LoginPage = () => {
                         </button>
                     </form>
 
-                    <p className="mt-8 text-center text-slate-400 text-sm">
+                    <p className="mt-8 text-center text-lms-charon text-sm font-medium">
                         Don't have an account?{' '}
-                        <Link to="/" className="text-purple-400 hover:text-purple-300 font-medium underline underline-offset-4">
+                        <Link to="/" className="text-lms-cascades hover:text-lms-smoke font-bold underline underline-offset-4">
                             Return Home
                         </Link>
                     </p>
