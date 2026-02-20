@@ -14,7 +14,6 @@ const features = [
         icon: BookOpen,
         title: 'Vast Course Library',
         desc: 'Access hundreds of curated courses across tech, design, business and more.',
-        gradient: 'from-primary-500 to-primary-700',
         bg: 'bg-primary-50',
         text: 'text-primary-600',
     },
@@ -22,7 +21,6 @@ const features = [
         icon: ShieldCheck,
         title: 'Verified Certificates',
         desc: 'Earn industry-recognized certificates that matter to top employers worldwide.',
-        gradient: 'from-teal-500 to-teal-700',
         bg: 'bg-teal-50',
         text: 'text-teal-600',
     },
@@ -30,10 +28,33 @@ const features = [
         icon: Users,
         title: 'Expert Instructors',
         desc: 'Learn directly from seasoned professionals with years of field experience.',
-        gradient: 'from-amber-400 to-amber-600',
         bg: 'bg-amber-50',
         text: 'text-amber-600',
     },
+];
+
+const categories = [
+    'Web Development', 'UI/UX Design', 'Data Science', 'Digital Marketing', 'Business Management', 'Artificial Intelligence'
+];
+
+const testimonials = [
+    {
+        name: 'Sarah Johnson',
+        role: 'Data Analyst at Google',
+        content: 'The curriculum is so well-structured. I went from zero to hiring-ready in 6 months.',
+        avatar: 'SJ'
+    },
+    {
+        name: 'Michael Chen',
+        role: 'Full Stack Developer',
+        content: 'Xyzon’s hands-on projects were the highlight. I built a real portfolio during the course.',
+        avatar: 'MC'
+    }
+];
+
+const faqs = [
+    { q: "Are the certificates industry-recognized?", a: "Yes, our certifications are verified and recognized by over 500+ global hiring partners." },
+    { q: "Can I learn at my own pace?", a: "Absolutely! All our courses are self-paced with lifetime access once enrolled." }
 ];
 
 const HomePage = () => {
@@ -42,15 +63,20 @@ const HomePage = () => {
             {/* Navbar */}
             <nav className="bg-white/80 backdrop-blur-xl border-b border-surface-border sticky top-0 z-50 shadow-sm shadow-primary-100/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-8">
                         <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto object-contain" />
+                        <div className="hidden md:flex items-center gap-6">
+                            <a href="#features" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Features</a>
+                            <a href="#categories" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Courses</a>
+                            <a href="#testimonials" className="text-sm font-bold text-ink-muted hover:text-primary-600 transition-colors">Success Stories</a>
+                        </div>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Link to="/login" className="text-sm font-semibold text-ink-muted hover:text-ink transition-colors px-4 py-2">
+                        <Link to="/login" className="text-sm font-black text-ink-muted hover:text-ink transition-colors px-4 py-2">
                             Sign In
                         </Link>
-                        <Link to="/login" style={{ background: '#4338ca', color: '#fff' }} className="px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-md">
-                            Get Started
+                        <Link to="/login" style={{ background: '#4338ca', color: '#fff' }} className="px-6 py-3 rounded-2xl text-sm font-black hover:opacity-90 transition-all shadow-xl shadow-primary-500/20">
+                            Enroll Now
                         </Link>
                     </div>
                 </div>
@@ -112,7 +138,7 @@ const HomePage = () => {
             </section>
 
             {/* Features */}
-            <section className="py-24 bg-white border-t border-surface-border">
+            <section id="features" className="py-24 bg-white border-t border-surface-border">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-black text-ink mb-4">Why Students Choose Xyzon</h2>
@@ -126,6 +152,58 @@ const HomePage = () => {
                                 </div>
                                 <h3 className="text-xl font-bold text-ink mb-3">{title}</h3>
                                 <p className="text-ink-muted leading-relaxed font-medium">{desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Categories */}
+            <section id="categories" className="py-24 bg-surface-50 border-t border-surface-border">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 className="text-3xl font-black text-ink mb-12">Top Categories</h2>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {categories.map((cat) => (
+                            <button key={cat} className="px-6 py-3 bg-white border border-surface-border rounded-2xl font-bold text-ink-muted hover:text-primary-600 hover:border-primary-400 hover:shadow-md transition-all">
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Testimonials */}
+            <section id="testimonials" className="py-24 bg-white border-t border-surface-border">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl font-black text-ink mb-4">Voices of Success</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {testimonials.map((t) => (
+                            <div key={t.name} className="p-8 bg-surface-50 rounded-[2.5rem] border border-surface-border">
+                                <p className="text-lg font-medium text-ink italic mb-6">"{t.content}"</p>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-black">{t.avatar}</div>
+                                    <div>
+                                        <p className="font-bold text-ink leading-tight">{t.name}</p>
+                                        <p className="text-xs text-primary-600 font-bold uppercase tracking-wider">{t.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ */}
+            <section className="py-24 bg-surface-50 border-t border-surface-border">
+                <div className="max-w-3xl mx-auto px-4">
+                    <h2 className="text-3xl font-black text-ink mb-12 text-center">Got Questions?</h2>
+                    <div className="space-y-6">
+                        {faqs.map((faq) => (
+                            <div key={faq.q} className="bg-white p-7 rounded-[2rem] border border-surface-border shadow-sm">
+                                <h3 className="font-bold text-ink mb-2">{faq.q}</h3>
+                                <p className="text-ink-muted font-medium text-sm leading-relaxed">{faq.a}</p>
                             </div>
                         ))}
                     </div>
