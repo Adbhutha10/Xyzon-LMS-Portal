@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, Settings, LogOut, GraduationCap, Clock, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Settings, LogOut, GraduationCap, Clock, ChevronRight, Flame, Trophy, Target } from 'lucide-react';
+
+const courses = [
+    { title: 'Full Stack Web Development', category: 'Web Dev', progress: 65, duration: '2.5h left', color: 'from-primary-500 to-primary-700' },
+    { title: 'UI/UX Design Fundamentals', category: 'Design', progress: 40, duration: '4h left', color: 'from-teal-500 to-teal-700' },
+    { title: 'Data Structures & Algorithms', category: 'CS Core', progress: 82, duration: '1h left', color: 'from-amber-400 to-amber-600' },
+];
+
+const statItems = [
+    { icon: Flame, label: 'Day Streak', value: '7', color: 'text-orange-500', bg: 'bg-orange-50' },
+    { icon: Trophy, label: 'Points Earned', value: '1,320', color: 'text-amber-500', bg: 'bg-amber-50' },
+    { icon: Target, label: 'Goals Met', value: '5/6', color: 'text-teal-600', bg: 'bg-teal-50' },
+];
 
 const DashboardPage = () => {
     const [student, setStudent] = useState(null);
@@ -21,94 +33,135 @@ const DashboardPage = () => {
     };
 
     if (!student) return null;
+    const initial = student.name ? student.name.charAt(0).toUpperCase() : 'S';
 
     return (
-        <div className="min-h-screen bg-lms-light text-lms-black flex">
+        <div className="min-h-screen bg-surface-50 text-ink font-sans flex">
             {/* Sidebar */}
-            <aside className="w-72 border-r border-lms-mint/50 bg-white/70 backdrop-blur-xl p-8 hidden lg:flex flex-col">
-                <div className="flex items-center gap-3 mb-12 px-2">
-                    <GraduationCap className="text-lms-cascades" size={32} />
-                    <span className="text-2xl font-bold tracking-tight">Xyzon LMS</span>
+            <aside className="w-72 border-r border-surface-border bg-white shadow-sm hidden lg:flex flex-col">
+                <div className="p-8 border-b border-surface-border">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
+                            <GraduationCap className="text-white" size={22} />
+                        </div>
+                        <span className="text-xl font-black text-ink">Xyzon <span className="text-primary-600">LMS</span></span>
+                    </div>
                 </div>
 
-                <nav className="space-y-3 flex-1">
-                    <button className="w-full flex items-center gap-4 px-5 py-4 bg-lms-black rounded-[1.25rem] font-bold text-white transition-all shadow-xl shadow-lms-black/10">
-                        <LayoutDashboard size={22} />
-                        Dashboard
-                    </button>
-                    <button className="w-full flex items-center gap-4 px-5 py-4 text-lms-charon hover:text-lms-black hover:bg-lms-mint/20 rounded-[1.25rem] font-bold transition-all">
-                        <BookOpen size={22} />
-                        My Courses
-                    </button>
-                    <button className="w-full flex items-center gap-4 px-5 py-4 text-lms-charon hover:text-lms-black hover:bg-lms-mint/20 rounded-[1.25rem] font-bold transition-all">
-                        <Settings size={22} />
-                        Settings
-                    </button>
+                <nav className="flex-1 px-4 py-6 space-y-2">
+                    {[
+                        { icon: LayoutDashboard, label: 'Dashboard', active: true },
+                        { icon: BookOpen, label: 'My Courses', active: false },
+                        { icon: Settings, label: 'Settings', active: false },
+                    ].map(({ icon: Icon, label, active }) => (
+                        <button key={label} className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all ${active ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/25' : 'text-ink-muted hover:text-ink hover:bg-surface-100'}`}>
+                            <Icon size={20} />
+                            {label}
+                        </button>
+                    ))}
                 </nav>
 
-                <div className="mt-auto">
+                <div className="p-4 border-t border-surface-border">
+                    <div className="flex items-center gap-4 bg-surface-50 rounded-2xl p-4 mb-4">
+                        <div className="w-11 h-11 bg-gradient-to-br from-primary-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">
+                            {initial}
+                        </div>
+                        <div className="overflow-hidden">
+                            <p className="font-bold text-sm text-ink truncate">{student.name}</p>
+                            <p className="text-xs text-ink-muted font-semibold truncate">{student.email}</p>
+                        </div>
+                    </div>
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-4 px-5 py-4 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-[1.25rem] font-bold transition-all group"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-2xl font-bold text-sm transition-all"
                     >
-                        <LogOut size={22} className="group-hover:-translate-x-1 transition-transform" />
-                        Logout
+                        <LogOut size={18} />
+                        Sign Out
                     </button>
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main className="flex-1 p-6 md:p-12 overflow-y-auto">
-                <header className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            {/* Main */}
+            <main className="flex-1 overflow-y-auto">
+                {/* Top Header */}
+                <div className="bg-white border-b border-surface-border px-10 py-6 flex items-center justify-between sticky top-0 z-10 shadow-sm">
                     <div>
-                        <h1 className="text-4xl font-extrabold mb-2">Welcome back, {student.name}! 👋</h1>
-                        <p className="text-lms-charon font-medium text-lg">Pick up right where you left off.</p>
+                        <h1 className="text-2xl font-black text-ink">Good evening, {student.name.split(' ')[0]}! 👋</h1>
+                        <p className="text-sm text-ink-muted font-semibold mt-0.5">You have 3 ongoing courses. Keep it up!</p>
                     </div>
-                    <div className="flex items-center gap-4 bg-white p-2 pr-6 rounded-2xl border border-lms-mint/50 shadow-sm">
-                        <div className="w-14 h-14 bg-gradient-to-br from-lms-cascades to-lms-smoke rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-lg">
-                            {student.name.charAt(0)}
+                    <div className="flex items-center gap-3 bg-surface-50 rounded-2xl px-4 py-3 border border-surface-border">
+                        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-teal-600 rounded-xl flex items-center justify-center text-white font-black text-lg shadow-md">
+                            {initial}
                         </div>
                         <div>
-                            <p className="font-bold text-sm leading-tight text-lms-black">{student.name}</p>
-                            <p className="text-xs font-medium text-lms-charon uppercase tracking-wider">Student ID #1732</p>
+                            <p className="font-bold text-sm text-ink leading-tight">{student.name}</p>
+                            <p className="text-[11px] text-primary-600 font-bold uppercase tracking-wider">Pro Student</p>
                         </div>
                     </div>
-                </header>
+                </div>
 
-                {/* Dashboard Stats / Grid */}
-                <section>
-                    <div className="flex items-center justify-between mb-8">
-                        <h2 className="text-2xl font-bold">Your Active Courses</h2>
-                        <button className="text-lms-cascades font-bold text-sm hover:underline underline-offset-4 flex items-center gap-1">
-                            View all <ChevronRight size={16} />
-                        </button>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                        {[1, 2, 3].map((id) => (
-                            <div key={id} className="bg-white border border-lms-mint/50 rounded-[2.5rem] p-8 hover:border-lms-cascades transition-all group shadow-sm hover:shadow-2xl hover:-translate-y-2">
-                                <div className="aspect-video bg-lms-light rounded-[1.5rem] mb-6 overflow-hidden relative border border-lms-mint/30">
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-lms-cascades/5 to-transparent"></div>
-                                    <div className="absolute top-4 right-4 bg-white/80 backdrop-blur px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-sm">
-                                        <Clock size={14} className="text-lms-smoke" />
-                                        <span className="text-[10px] font-bold text-lms-black uppercase tracking-widest">2.5h left</span>
-                                    </div>
+                <div className="p-10 space-y-10">
+                    {/* Stats */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        {statItems.map(({ icon: Icon, label, value, color, bg }) => (
+                            <div key={label} className="bg-white border border-surface-border rounded-3xl p-6 flex items-center gap-5 shadow-sm hover:shadow-md transition-shadow">
+                                <div className={`w-14 h-14 ${bg} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                                    <Icon className={`${color} h-7 w-7`} />
                                 </div>
-                                <h3 className="text-xl font-bold mb-3 group-hover:text-lms-cascades transition-colors leading-tight">Mastering Full Stack Architecture with React & Node</h3>
-                                <p className="text-lms-charon text-sm font-medium mb-6 line-clamp-2">Deep dive into enterprise scaling, database optimization, and high-performance UI patterns.</p>
-
-                                <div className="space-y-4 pt-6 border-t border-lms-light">
-                                    <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
-                                        <span className="text-lms-cascades px-3 py-1 bg-lms-cascades/10 rounded-lg">Web Dev</span>
-                                        <span className="text-lms-black">65% Done</span>
-                                    </div>
-                                    <div className="w-full h-2.5 bg-lms-light rounded-full overflow-hidden">
-                                        <div className="h-full bg-lms-cascades rounded-full" style={{ width: '65%' }}></div>
-                                    </div>
+                                <div>
+                                    <p className="text-2xl font-black text-ink leading-tight">{value}</p>
+                                    <p className="text-sm text-ink-muted font-semibold">{label}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </section>
+
+                    {/* Courses */}
+                    <div>
+                        <div className="flex items-center justify-between mb-6">
+                            <h2 className="text-xl font-black text-ink">Continue Learning</h2>
+                            <button className="flex items-center gap-1 text-primary-600 font-bold text-sm hover:underline underline-offset-4">
+                                View all courses <ChevronRight size={16} />
+                            </button>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+                            {courses.map((course) => (
+                                <div key={course.title} className="bg-white border border-surface-border rounded-[2rem] overflow-hidden hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-100/50 hover:border-primary-200 transition-all group cursor-pointer">
+                                    {/* Course cover */}
+                                    <div className={`h-36 bg-gradient-to-br ${course.color} relative flex items-center justify-center`}>
+                                        <BookOpen className="text-white/30 h-20 w-20" />
+                                        <div className="absolute top-4 right-4 bg-white/20 backdrop-blur px-3 py-1.5 rounded-xl flex items-center gap-1.5 border border-white/30">
+                                            <Clock size={12} className="text-white" />
+                                            <span className="text-[10px] font-black text-white uppercase tracking-wider">{course.duration}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="p-7">
+                                        <span className="inline-block text-[10px] font-black uppercase tracking-wider text-primary-600 bg-primary-50 px-3 py-1 rounded-lg mb-3">
+                                            {course.category}
+                                        </span>
+                                        <h3 className="font-black text-ink text-lg leading-snug mb-5 group-hover:text-primary-600 transition-colors">{course.title}</h3>
+                                        <div className="space-y-3">
+                                            <div className="flex items-center justify-between">
+                                                <span className="text-xs font-bold text-ink-muted uppercase tracking-wider">Progress</span>
+                                                <span className="text-sm font-black text-ink">{course.progress}%</span>
+                                            </div>
+                                            <div className="w-full h-3 bg-surface-100 rounded-full overflow-hidden">
+                                                <div
+                                                    className={`h-full bg-gradient-to-r ${course.color} rounded-full shadow-sm`}
+                                                    style={{ width: `${course.progress}%` }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <button className="mt-6 w-full py-3 bg-surface-50 hover:bg-primary-50 border border-surface-border hover:border-primary-200 text-ink hover:text-primary-700 font-bold rounded-2xl text-sm transition-all">
+                                            Continue Course →
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </main>
         </div>
     );
