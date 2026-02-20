@@ -73,11 +73,11 @@ const HomePage = () => {
 
                     <div className="text-center max-w-5xl mx-auto">
                         <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
-                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-600 via-primary-700 to-teal-600">
+                            <span style={{ color: '#1e3a5f' }}>
                                 Learn Smarter.
                             </span>
                             <br />
-                            <span className="text-ink">Grow Faster.</span>
+                            <span style={{ color: '#1e3a5f' }}>Grow Faster.</span>
                         </h1>
                         <p className="text-xl text-ink-muted max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
                             Join over 12,000 students mastering in-demand skills through expert-led courses, hands-on projects, and industry-recognized certifications.
