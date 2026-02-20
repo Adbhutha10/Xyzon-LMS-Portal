@@ -1,10 +1,19 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+
 function App() {
     return (
-        <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-            <h1 className="text-4xl font-bold mb-4">LMS Portal Coming Soon</h1>
-            <p className="text-gray-400">Environment Setup is Complete.</p>
-        </div>
-    )
+        <Router>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
-export default App
+export default App;

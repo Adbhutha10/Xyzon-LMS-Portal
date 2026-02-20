@@ -5,12 +5,27 @@ const { connectDB } = require('./config/db');
 
 const app = express();
 
-// Connect to Database
-connectDB();
+// Import Routes
+const authRoutes = require('./routes/authRoutes');
+const Student = require('./models/Student');
+
+// Connect to Database & Sync
+const startServer = async () => {
+    await connectDB();
+
+    // Sync Models
+    await sequelize.sync({ alter: true });
+    console.log('Database Synced');
+};
+
+startServer();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
