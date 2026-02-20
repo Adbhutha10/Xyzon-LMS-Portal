@@ -52,7 +52,7 @@ const HomePage = () => {
                         <Link to="/login" className="text-sm font-semibold text-ink-muted hover:text-ink transition-colors px-4 py-2">
                             Sign In
                         </Link>
-                        <Link to="/login" className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:shadow-lg hover:shadow-primary-500/25 transition-all">
+                        <Link to="/login" style={{ background: '#4338ca', color: '#fff' }} className="px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shadow-md">
                             Get Started
                         </Link>
                     </div>
@@ -88,7 +88,8 @@ const HomePage = () => {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link
                                 to="/login"
-                                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-bold rounded-2xl shadow-xl shadow-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all group"
+                                style={{ background: '#4338ca', color: '#fff' }}
+                                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 font-bold rounded-2xl shadow-xl hover:-translate-y-0.5 transition-all group"
                             >
                                 <Play size={18} className="fill-white" />
                                 Start Learning Free
@@ -135,13 +136,14 @@ const HomePage = () => {
             </section>
 
             {/* CTA */}
-            <section className="py-24 bg-gradient-to-r from-primary-600 to-primary-700">
+            <section style={{ background: '#3730a3' }} className="py-24">
                 <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-4xl md:text-5xl font-black text-white mb-6">Ready to transform your future?</h2>
-                    <p className="text-primary-200 text-xl mb-10 font-medium">Join thousands of learners who are already advancing their careers.</p>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ color: '#fff' }}>Ready to transform your future?</h2>
+                    <p className="text-xl mb-10 font-medium" style={{ color: '#c7d2fe' }}>Join thousands of learners who are already advancing their careers.</p>
                     <Link
                         to="/login"
-                        className="inline-flex items-center gap-2 px-10 py-5 bg-white text-primary-700 font-black text-lg rounded-2xl shadow-2xl hover:shadow-white/30 hover:bg-surface-50 transition-all group"
+                        className="inline-flex items-center gap-2 px-10 py-5 font-black text-lg rounded-2xl shadow-2xl hover:-translate-y-0.5 transition-all group"
+                        style={{ background: '#fff', color: '#3730a3' }}
                     >
                         Start for Free — It's Quick
                         <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
