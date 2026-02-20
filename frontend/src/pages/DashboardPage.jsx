@@ -74,12 +74,13 @@ const DashboardPage = () => {
 
                 <nav className="flex-1 px-4 py-6 space-y-2">
                     {[
-                        { icon: LayoutDashboard, label: 'Dashboard', active: true },
-                        { icon: BookOpen, label: 'My Courses', active: false },
-                        { icon: Settings, label: 'Settings', active: false },
-                    ].map(({ icon: Icon, label, active }) => (
+                        { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', active: true },
+                        { icon: BookOpen, label: 'Browse Courses', path: '/courses', active: false },
+                        { icon: Settings, label: 'Settings', path: '#', active: false },
+                    ].map(({ icon: Icon, label, path, active }) => (
                         <button
                             key={label}
+                            onClick={() => path !== '#' && navigate(path)}
                             className="w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all"
                             style={active
                                 ? { color: '#1e3a5f' }
@@ -158,7 +159,10 @@ const DashboardPage = () => {
                     <div>
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-xl font-black text-ink">Continue Learning</h2>
-                            <button className="flex items-center gap-1 text-primary-600 font-bold text-sm hover:underline underline-offset-4">
+                            <button
+                                onClick={() => navigate('/courses')}
+                                className="flex items-center gap-1 text-primary-600 font-bold text-sm hover:underline underline-offset-4"
+                            >
                                 View all courses <ChevronRight size={16} />
                             </button>
                         </div>
