@@ -7,7 +7,9 @@ const app = express();
 
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 const Student = require('./models/Student');
+const Course = require('./models/Course');
 
 // Connect to Database & Sync
 const startServer = async () => {
@@ -26,6 +28,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Basic Route
 app.get('/', (req, res) => {
