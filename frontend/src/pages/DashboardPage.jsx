@@ -49,7 +49,11 @@ const DashboardPage = () => {
                         { icon: BookOpen, label: 'My Courses', active: false },
                         { icon: Settings, label: 'Settings', active: false },
                     ].map(({ icon: Icon, label, active }) => (
-                        <button key={label} className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all ${active ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/25' : 'text-ink-muted hover:text-ink hover:bg-surface-100'}`}>
+                        <button
+                            key={label}
+                            className="w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all"
+                            style={{ color: 'rgb(107, 114, 128)' }}
+                        >
                             <Icon size={20} />
                             {label}
                         </button>
@@ -62,13 +66,14 @@ const DashboardPage = () => {
                             {initial}
                         </div>
                         <div className="overflow-hidden">
-                            <p className="font-bold text-sm text-ink truncate">{student.name}</p>
-                            <p className="text-xs text-ink-muted font-semibold truncate">{student.email}</p>
+                            <p className="font-bold text-sm truncate" style={{ color: 'rgb(107, 114, 128)' }}>{student.name}</p>
+                            <p className="text-xs font-semibold truncate" style={{ color: 'rgb(107, 114, 128)' }}>{student.email}</p>
                         </div>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-3 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-2xl font-bold text-sm transition-all"
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl font-bold text-sm transition-all"
+                        style={{ color: 'rgb(107, 114, 128)' }}
                     >
                         <LogOut size={18} />
                         Sign Out
