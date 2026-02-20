@@ -101,8 +101,8 @@ const CoursesPage = () => {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-6 py-2.5 rounded-2xl font-bold text-sm transition-all border ${selectedCategory === cat
-                                    ? 'bg-primary-600 text-white border-primary-600 shadow-lg shadow-primary-100'
-                                    : 'bg-white text-ink-muted border-surface-border hover:border-primary-400 hover:text-primary-600'
+                                ? 'bg-primary-600 text-white border-primary-600 shadow-lg shadow-primary-100'
+                                : 'bg-white text-ink-muted border-surface-border hover:border-primary-400 hover:text-primary-600'
                                 }`}
                         >
                             {cat}
@@ -158,7 +158,10 @@ const CoursesPage = () => {
                                         </div>
                                     </div>
 
-                                    <button className="w-full py-4 bg-surface-50 border border-surface-border text-ink font-black rounded-2xl flex items-center justify-center gap-2 group-hover:bg-primary-600 group-hover:border-primary-600 group-hover:text-white transition-all shadow-sm hover:shadow-primary-200">
+                                    <button
+                                        onClick={() => navigate(`/courses/${course.id}`)}
+                                        className="w-full py-4 bg-surface-50 border border-surface-border text-ink font-black rounded-2xl flex items-center justify-center gap-2 group-hover:bg-primary-600 group-hover:border-primary-600 group-hover:text-white transition-all shadow-sm hover:shadow-primary-200"
+                                    >
                                         Explore Course <ChevronRight size={18} />
                                     </button>
                                 </div>
