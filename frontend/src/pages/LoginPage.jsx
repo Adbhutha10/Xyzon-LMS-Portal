@@ -35,7 +35,7 @@ const LoginPage = () => {
                 <div className="absolute bottom-24 -right-12 w-52 h-52 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
 
                 <div className="relative">
-                    <img src="/xyzon-logo.png" alt="Xyzon LMS" style={{ height: '48px', width: 'auto', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+                    <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto object-contain" />
 
                     <div className="space-y-8">
                         <div>
