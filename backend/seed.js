@@ -40,7 +40,7 @@ const seedStudent = async () => {
                     progress: 40,
                     duration: '4h left',
                     color: 'from-teal-500 to-teal-700',
-                    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563dc4c?auto=format&fit=crop&q=80&w=800',
+                    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800',
                     studentId: testStudent.id
                 },
                 {
@@ -55,20 +55,20 @@ const seedStudent = async () => {
             ]);
             console.log('Sample courses seeded successfully!');
         } else {
-            // Update existing courses with images if they don't have them
+            // Force update all courses with new reliable images
             await Course.update(
                 { image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800' },
-                { where: { title: 'Full Stack Web Development', image: null } }
+                { where: { title: 'Full Stack Web Development' } }
             );
             await Course.update(
-                { image: 'https://images.unsplash.com/photo-1586717791821-3f44a563dc4c?auto=format&fit=crop&q=80&w=800' },
-                { where: { title: 'UI/UX Design Fundamentals', image: null } }
+                { image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800' },
+                { where: { title: 'UI/UX Design Fundamentals' } }
             );
             await Course.update(
                 { image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800' },
-                { where: { title: 'Data Structures & Algorithms', image: null } }
+                { where: { title: 'Data Structures & Algorithms' } }
             );
-            console.log('Sample courses already exist, updated images.');
+            console.log('Sample courses already exist, updated all images with reliable URLs.');
         }
 
         process.exit();
