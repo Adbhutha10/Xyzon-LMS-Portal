@@ -18,13 +18,28 @@ const CourseDetailPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [course, setCourse] = useState(null);
+    const [isEnrolled, setIsEnrolled] = useState(false);
+    const [enrolling, setEnrolling] = useState(false);
+    const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(true);
+    const rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const normalizedApiUrl = rawApiUrl.replace(/\/+$/, '');
+    const apiBaseUrl = normalizedApiUrl.endsWith('/api') ? normalizedApiUrl : `${normalizedApiUrl}/api`;
 
     useEffect(() => {
         const fetchCourse = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/courses/${id}`);
-                setCourse(response.data);
+                const courseResponse = await axios.get(`${apiBaseUrl}/courses/${id}`);
+                setCourse(courseResponse.data);
+
+                const token = localStorage.getItem('token');
+                if (token) {
+                    const enrollmentResponse = await axios.get(`${apiBaseUrl}/courses/my-enrollments`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    });
+                    const enrolledIds = enrollmentResponse.data.enrolledCourseIds || [];
+                    setIsEnrolled(enrolledIds.includes(Number(id)));
+                }
             } catch (error) {
                 console.error('Error fetching course details:', error);
             } finally {
@@ -32,7 +47,43 @@ const CourseDetailPage = () => {
             }
         };
         fetchCourse();
-    }, [id]);
+    }, [id, apiBaseUrl]);
+
+    const handleEnroll = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
+        if (isEnrolled) {
+            navigate('/dashboard');
+            return;
+        }
+
+        setEnrolling(true);
+        setMessage('');
+
+        try {
+            await axios.post(
+                `${apiBaseUrl}/courses/${id}/enroll`,
+                {},
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            setIsEnrolled(true);
+            setMessage('Enrollment successful! You can continue this course from your dashboard.');
+        } catch (error) {
+            const serverMessage = error.response?.data?.message;
+            if (error.response?.status === 409) {
+                setIsEnrolled(true);
+                setMessage('You are already enrolled in this course.');
+            } else {
+                setMessage(serverMessage || 'Failed to enroll. Please try again.');
+            }
+        } finally {
+            setEnrolling(false);
+        }
+    };
 
     if (loading) {
         return (
@@ -82,8 +133,12 @@ const CourseDetailPage = () => {
                         <button className="hidden sm:block ui-btn-secondary rounded-xl px-6 py-2.5">
                             Save for later
                         </button>
-                        <button className="ui-btn-primary rounded-xl px-6 py-2.5">
-                            Enroll Now
+                        <button
+                            onClick={handleEnroll}
+                            disabled={enrolling}
+                            className="ui-btn-primary rounded-xl px-6 py-2.5 disabled:opacity-70"
+                        >
+                            {enrolling ? 'Enrolling...' : isEnrolled ? 'Go to Dashboard' : 'Enroll Now'}
                         </button>
                     </div>
                 </div>
@@ -183,14 +238,24 @@ const CourseDetailPage = () => {
                             </div>
 
                             <div className="p-8">
+                                {message && (
+                                    <div className={`mb-5 rounded-2xl px-4 py-3 text-sm font-semibold ${isEnrolled ? 'bg-teal-50 border border-teal-200 text-teal-700' : 'bg-red-50 border border-red-200 text-red-700'}`}>
+                                        {message}
+                                    </div>
+                                )}
+
                                 <div className="flex items-end gap-3 mb-8">
                                     <span className="text-4xl font-black text-ink">₹{course.price}</span>
                                     <span className="text-lg text-ink-muted line-through font-bold mb-1">₹999</span>
                                     <span className="text-teal-600 font-black text-sm mb-1 ml-auto">LIMITED OFFER</span>
                                 </div>
 
-                                <button className="w-full py-5 bg-primary-600 text-white font-black rounded-2xl text-lg hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 mb-4">
-                                    Enroll Now
+                                <button
+                                    onClick={handleEnroll}
+                                    disabled={enrolling}
+                                    className="w-full py-5 bg-primary-600 text-white font-black rounded-2xl text-lg hover:bg-primary-700 transition-all shadow-lg shadow-primary-200 mb-4 disabled:opacity-70"
+                                >
+                                    {enrolling ? 'Enrolling...' : isEnrolled ? 'Open Dashboard' : 'Enroll Now'}
                                 </button>
                                 <button className="w-full py-5 bg-white border-2 border-primary-600 text-primary-600 font-black rounded-2xl text-lg hover:bg-primary-50 transition-all mb-8">
                                     Try for free

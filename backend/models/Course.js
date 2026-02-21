@@ -35,6 +35,10 @@ const Course = sequelize.define('Course', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    sourceCourseId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
 });
 
 module.exports = Course;

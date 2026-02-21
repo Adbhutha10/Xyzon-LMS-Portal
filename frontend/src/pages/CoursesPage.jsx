@@ -6,19 +6,31 @@ import axios from 'axios';
 const CoursesPage = () => {
     const [courses, setCourses] = useState([]);
     const [filteredCourses, setFilteredCourses] = useState([]);
+    const [enrolledCourseIds, setEnrolledCourseIds] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const navigate = useNavigate();
 
     const categories = ['All', 'Development', 'Design', 'Data Science', 'Security', 'Marketing', 'Business'];
+    const rawApiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const normalizedApiUrl = rawApiUrl.replace(/\/+$/, '');
+    const apiBaseUrl = normalizedApiUrl.endsWith('/api') ? normalizedApiUrl : `${normalizedApiUrl}/api`;
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/courses');
+                const response = await axios.get(`${apiBaseUrl}/courses`);
                 setCourses(response.data);
                 setFilteredCourses(response.data);
+
+                const token = localStorage.getItem('token');
+                if (token) {
+                    const enrollmentResponse = await axios.get(`${apiBaseUrl}/courses/my-enrollments`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    });
+                    setEnrolledCourseIds(enrollmentResponse.data.enrolledCourseIds || []);
+                }
             } catch (error) {
                 console.error('Error fetching courses:', error);
             } finally {
@@ -26,7 +38,7 @@ const CoursesPage = () => {
             }
         };
         fetchCourses();
-    }, []);
+    }, [apiBaseUrl]);
 
     useEffect(() => {
         let result = courses;
@@ -134,6 +146,11 @@ const CoursesPage = () => {
                                     <div className="absolute bottom-4 right-4 bg-primary-600 text-white px-4 py-1.5 rounded-xl font-black text-xs shadow-lg">
                                         ₹{course.price}
                                     </div>
+                                    {enrolledCourseIds.includes(course.id) && (
+                                        <div className="absolute bottom-4 left-4 bg-teal-600 text-white px-4 py-1.5 rounded-xl font-black text-xs shadow-lg">
+                                            Enrolled
+                                        </div>
+                                    )}
                                 </div>
 
                                 <div className="p-8">
@@ -162,7 +179,7 @@ const CoursesPage = () => {
                                         onClick={() => navigate(`/courses/${course.id}`)}
                                         className="w-full py-4 bg-surface-50 border border-surface-border text-ink font-black rounded-2xl flex items-center justify-center gap-2 group-hover:bg-primary-600 group-hover:border-primary-600 group-hover:text-white transition-all shadow-sm hover:shadow-primary-200"
                                     >
-                                        Explore Course <ChevronRight size={18} />
+                                        {enrolledCourseIds.includes(course.id) ? 'Continue Learning' : 'Explore Course'} <ChevronRight size={18} />
                                     </button>
                                 </div>
                             </div>
