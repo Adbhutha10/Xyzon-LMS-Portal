@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const LoginPage = () => {
     const [mode, setMode] = useState('login');
+    const [isAdminLogin, setIsAdminLogin] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -35,9 +36,18 @@ const LoginPage = () => {
 
             const response = await axios.post(`${apiBaseUrl}${endpoint}`, payload);
 
+            if (mode === 'login' && isAdminLogin && response.data.student.role !== 'admin') {
+                setError('This account does not have admin access.');
+                return;
+            }
+
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('student', JSON.stringify(response.data.student));
-            navigate('/dashboard');
+            if (mode === 'login' && (isAdminLogin || response.data.student.role === 'admin')) {
+                navigate('/admin');
+            } else {
+                navigate('/dashboard');
+            }
         } catch (err) {
             const serverMessage = typeof err.response?.data === 'string'
                 ? err.response.data
@@ -160,7 +170,7 @@ const LoginPage = () => {
                         </div>
                         <h1 className="text-3xl font-black mb-2 text-ink">
                             {mode === 'signup' && 'Create your account'}
-                            {mode === 'login' && 'Sign in to your account'}
+                            {mode === 'login' && (isAdminLogin ? 'Sign in to admin account' : 'Sign in to your account')}
                             {mode === 'forgot' && 'Forgot password'}
                             {mode === 'reset' && 'Reset your password'}
                         </h1>
@@ -168,7 +178,9 @@ const LoginPage = () => {
                             {mode === 'signup'
                                 ? 'Start learning by creating your account.'
                                 : mode === 'login'
-                                    ? 'Enter your email and password to continue.'
+                                    ? (isAdminLogin
+                                        ? 'Enter admin credentials to continue to Admin Panel.'
+                                        : 'Enter your email and password to continue.')
                                     : mode === 'forgot'
                                         ? 'Enter your account email to generate a reset token.'
                                         : 'Use your reset token and set a new password.'}
@@ -180,6 +192,7 @@ const LoginPage = () => {
                             type="button"
                             onClick={() => {
                                 setMode('login');
+                                setIsAdminLogin(false);
                                 clearNotices();
                             }}
                             className={`rounded-xl py-2.5 text-sm font-black transition-all ${mode === 'login' ? 'bg-white text-primary-700 shadow-sm' : 'text-ink-muted'}`}
@@ -190,6 +203,7 @@ const LoginPage = () => {
                             type="button"
                             onClick={() => {
                                 setMode('signup');
+                                setIsAdminLogin(false);
                                 clearNotices();
                             }}
                             className={`rounded-xl py-2.5 text-sm font-black transition-all ${mode === 'signup' ? 'bg-white text-primary-700 shadow-sm' : 'text-ink-muted'}`}
@@ -260,6 +274,7 @@ const LoginPage = () => {
                                         type="button"
                                         onClick={() => {
                                             setMode('forgot');
+                                            setIsAdminLogin(false);
                                             setPassword('');
                                             setResetToken('');
                                             clearNotices();
@@ -329,12 +344,30 @@ const LoginPage = () => {
                                     type="button"
                                     onClick={() => {
                                         setMode(mode === 'signup' ? 'login' : 'signup');
+                                        setIsAdminLogin(false);
                                         clearNotices();
                                     }}
                                     className="font-bold underline underline-offset-4 text-primary-600"
                                 >
                                     {mode === 'signup' ? 'Sign in' : 'Create one'}
                                 </button>
+
+                                {mode === 'login' && (
+                                    <>
+                                        <span className="mx-2 text-ink-faint">•</span>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                setMode('login');
+                                                setIsAdminLogin(true);
+                                                clearNotices();
+                                            }}
+                                            className="font-bold underline underline-offset-4 text-primary-600"
+                                        >
+                                            Admin login
+                                        </button>
+                                    </>
+                                )}
                             </>
                         )}
 
@@ -345,6 +378,7 @@ const LoginPage = () => {
                                     type="button"
                                     onClick={() => {
                                         setMode('login');
+                                        setIsAdminLogin(false);
                                         setPassword('');
                                         setResetToken('');
                                         clearNotices();
