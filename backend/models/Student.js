@@ -24,18 +24,32 @@ const Student = sequelize.define('Student', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    passwordResetToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    passwordResetExpires: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+    passwordChangedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
 }, {
     hooks: {
         beforeCreate: async (student) => {
             if (student.password) {
                 const salt = await bcrypt.genSalt(10);
                 student.password = await bcrypt.hash(student.password, salt);
+                student.passwordChangedAt = new Date();
             }
         },
         beforeUpdate: async (student) => {
             if (student.changed('password')) {
                 const salt = await bcrypt.genSalt(10);
                 student.password = await bcrypt.hash(student.password, salt);
+                student.passwordChangedAt = new Date();
             }
         },
     },
