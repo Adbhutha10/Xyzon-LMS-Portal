@@ -151,7 +151,7 @@ const CourseDetailPage = () => {
                             </h2>
                             <div className="space-y-4">
                                 {syllabus.map((item, i) => (
-                                    <div key={i} className="bg-white border border-surface-border rounded-2xl p-6 flex items-center justify-between hover:border-primary-300 transition-all cursor-pointer group">
+                                    <div key={i} className="bg-white border border-surface-border rounded-2xl p-6 flex items-center justify-between hover:border-primary-400 transition-all cursor-pointer group">
                                         <div className="flex items-center gap-5">
                                             <div className="w-10 h-10 bg-surface-50 rounded-xl flex items-center justify-center text-ink-muted font-black group-hover:bg-primary-50 group-hover:text-primary-600 transition-colors text-sm">
                                                 0{i + 1}

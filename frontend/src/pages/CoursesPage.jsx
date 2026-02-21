@@ -102,7 +102,7 @@ const CoursesPage = () => {
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-6 py-2.5 rounded-2xl font-bold text-sm transition-all border ${selectedCategory === cat
                                 ? 'bg-primary-600 text-white border-primary-600 shadow-lg shadow-primary-100'
-                                : 'bg-white text-ink-muted border-surface-border hover:border-primary-300 hover:text-primary-600'
+                                : 'bg-white text-ink-muted border-surface-border hover:border-primary-400 hover:text-primary-600'
                                 }`}
                         >
                             {cat}
