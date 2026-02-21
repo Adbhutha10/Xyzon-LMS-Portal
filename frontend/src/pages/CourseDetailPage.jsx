@@ -49,7 +49,7 @@ const CourseDetailPage = () => {
                 <h2 className="text-2xl font-black text-ink">Course not found</h2>
                 <button
                     onClick={() => navigate('/courses')}
-                    className="mt-6 px-8 py-3 bg-primary-600 text-white font-black rounded-2xl hover:bg-primary-700 transition-all"
+                    className="mt-6 ui-btn-primary px-8 py-3"
                 >
                     Back to Catalog
                 </button>
@@ -67,9 +67,9 @@ const CourseDetailPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-surface-50 text-ink font-sans">
+        <div className="ui-shell">
             {/* Header */}
-            <header className="bg-white border-b border-surface-border sticky top-0 z-30 shadow-sm">
+            <header className="ui-topbar shadow-sm">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <button
                         onClick={() => navigate('/courses')}
@@ -79,10 +79,10 @@ const CourseDetailPage = () => {
                         Back to Catalog
                     </button>
                     <div className="flex items-center gap-4">
-                        <button className="hidden sm:block px-6 py-2.5 bg-surface-50 border border-surface-border text-ink font-bold rounded-xl text-sm hover:bg-surface-100 transition-all">
+                        <button className="hidden sm:block ui-btn-secondary rounded-xl px-6 py-2.5">
                             Save for later
                         </button>
-                        <button className="px-6 py-2.5 bg-primary-600 text-white font-black rounded-xl text-sm hover:bg-primary-700 transition-all shadow-md">
+                        <button className="ui-btn-primary rounded-xl px-6 py-2.5">
                             Enroll Now
                         </button>
                     </div>

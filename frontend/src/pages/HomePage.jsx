@@ -59,7 +59,7 @@ const faqs = [
 
 const HomePage = () => {
     return (
-        <div className="min-h-screen bg-surface-50 text-ink font-sans">
+        <div className="ui-shell">
             {/* Navbar */}
             <nav className="bg-white/80 backdrop-blur-xl border-b border-surface-border sticky top-0 z-50 shadow-sm shadow-primary-100/30">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -76,7 +76,7 @@ const HomePage = () => {
                         <Link to="/login" className="text-sm font-black text-ink-muted hover:text-ink transition-colors px-4 py-2">
                             Sign In
                         </Link>
-                        <Link to="/login" style={{ background: '#4338ca', color: '#fff' }} className="px-6 py-3 rounded-2xl text-sm font-black hover:opacity-90 transition-all shadow-xl shadow-primary-500/20">
+                        <Link to="/login" className="ui-btn-primary px-6 py-3">
                             Enroll Now
                         </Link>
                     </div>
@@ -100,11 +100,11 @@ const HomePage = () => {
 
                     <div className="text-center max-w-5xl mx-auto">
                         <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-8 leading-tight">
-                            <span style={{ color: '#1e3a5f' }}>
+                            <span className="text-ink">
                                 Learn Smarter.
                             </span>
                             <br />
-                            <span style={{ color: '#1e3a5f' }}>Grow Faster.</span>
+                            <span className="text-ink">Grow Faster.</span>
                         </h1>
                         <p className="text-xl text-ink-muted max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
                             Join over 12,000 students mastering in-demand skills through expert-led courses, hands-on projects, and industry-recognized certifications.
@@ -112,14 +112,13 @@ const HomePage = () => {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link
                                 to="/login"
-                                style={{ background: '#4338ca', color: '#fff' }}
-                                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 font-bold rounded-2xl shadow-xl hover:-translate-y-0.5 transition-all group"
+                                className="ui-btn-primary w-full sm:w-auto gap-3 px-8 py-4 font-bold shadow-xl hover:-translate-y-0.5 group"
                             >
                                 <Play size={18} className="fill-white" />
                                 Start Learning Free
                                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </Link>
-                            <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white border border-surface-border text-ink font-bold rounded-2xl hover:border-primary-300 hover:bg-surface-100 transition-all shadow-sm">
+                            <button className="ui-btn-secondary w-full sm:w-auto px-8 py-4">
                                 <Star size={18} className="fill-amber-400 text-amber-400" />
                                 View Top Courses
                             </button>
@@ -212,14 +211,13 @@ const HomePage = () => {
             </section>
 
             {/* CTA */}
-            <section style={{ background: '#3730a3' }} className="py-24">
+            <section className="py-24 bg-primary-700">
                 <div className="max-w-4xl mx-auto px-4 text-center">
-                    <h2 className="text-4xl md:text-5xl font-black mb-6" style={{ color: '#fff' }}>Ready to transform your future?</h2>
-                    <p className="text-xl mb-10 font-medium" style={{ color: '#c7d2fe' }}>Join thousands of learners who are already advancing their careers.</p>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 text-white">Ready to transform your future?</h2>
+                    <p className="text-xl mb-10 font-medium text-primary-200">Join thousands of learners who are already advancing their careers.</p>
                     <Link
                         to="/login"
-                        className="inline-flex items-center gap-2 px-10 py-5 font-black text-lg rounded-2xl shadow-2xl hover:-translate-y-0.5 transition-all group"
-                        style={{ background: '#fff', color: '#3730a3' }}
+                        className="inline-flex items-center gap-2 px-10 py-5 font-black text-lg rounded-2xl shadow-2xl hover:-translate-y-0.5 transition-all group bg-white text-primary-700"
                     >
                         Start for Free — It's Quick
                         <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />

@@ -65,7 +65,7 @@ const DashboardPage = () => {
     const initial = student.name ? student.name.charAt(0).toUpperCase() : 'S';
 
     return (
-        <div className="min-h-screen bg-surface-50 text-ink font-sans flex">
+        <div className="ui-shell flex">
             {/* Sidebar */}
             <aside className="w-72 border-r border-surface-border bg-white shadow-sm hidden lg:flex flex-col">
                 <div className="p-8 border-b border-surface-border">
@@ -81,11 +81,7 @@ const DashboardPage = () => {
                         <button
                             key={label}
                             onClick={() => path !== '#' && navigate(path)}
-                            className="w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all"
-                            style={active
-                                ? { color: '#1e3a5f' }
-                                : { color: '#6b7280' }
-                            }
+                            className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold text-sm transition-all ${active ? 'text-ink bg-primary-50 border border-primary-100' : 'text-ink-muted hover:text-primary-600'}`}
                         >
                             <Icon size={20} />
                             {label}
@@ -99,14 +95,13 @@ const DashboardPage = () => {
                             {initial}
                         </div>
                         <div className="overflow-hidden">
-                            <p className="font-bold text-sm truncate" style={{ color: 'rgb(107, 114, 128)' }}>{student.name}</p>
-                            <p className="text-xs font-semibold truncate" style={{ color: 'rgb(107, 114, 128)' }}>{student.email}</p>
+                            <p className="font-bold text-sm truncate text-ink-muted">{student.name}</p>
+                            <p className="text-xs font-semibold truncate text-ink-muted">{student.email}</p>
                         </div>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl font-bold text-sm transition-all"
-                        style={{ color: 'rgb(107, 114, 128)' }}
+                        className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-2xl font-bold text-sm transition-all text-ink-muted hover:text-primary-600"
                     >
                         <LogOut size={18} />
                         Sign Out

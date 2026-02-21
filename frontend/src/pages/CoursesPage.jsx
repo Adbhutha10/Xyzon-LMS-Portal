@@ -51,9 +51,9 @@ const CoursesPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-surface-50 text-ink font-sans">
+        <div className="ui-shell">
             {/* Header */}
-            <header className="bg-white border-b border-surface-border sticky top-0 z-30 shadow-sm">
+            <header className="ui-topbar shadow-sm">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-8">
                         <img src="/xyzon-logo.png" alt="Xyzon LMS" className="h-10 w-auto cursor-pointer" onClick={() => navigate('/')} />
@@ -78,7 +78,7 @@ const CoursesPage = () => {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="px-6 py-2.5 bg-primary-600 text-white font-black rounded-xl text-sm hover:bg-primary-700 transition-all shadow-md shadow-primary-200">
+                        <button className="ui-btn-primary rounded-xl px-6 py-2.5">
                             Support
                         </button>
                     </div>
@@ -102,7 +102,7 @@ const CoursesPage = () => {
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-6 py-2.5 rounded-2xl font-bold text-sm transition-all border ${selectedCategory === cat
                                 ? 'bg-primary-600 text-white border-primary-600 shadow-lg shadow-primary-100'
-                                : 'bg-white text-ink-muted border-surface-border hover:border-primary-400 hover:text-primary-600'
+                                : 'bg-white text-ink-muted border-surface-border hover:border-primary-300 hover:text-primary-600'
                                 }`}
                         >
                             {cat}

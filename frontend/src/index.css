@@ -38,3 +38,45 @@
         border: 1px solid rgba(99, 102, 241, 0.1);
     }
 }
+
+@layer components {
+    .ui-shell {
+        @apply min-h-screen bg-surface-50 text-ink font-sans;
+    }
+
+    .ui-section {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+
+    .ui-card {
+        @apply bg-white border border-surface-border rounded-3xl shadow-sm;
+    }
+
+    .ui-pill {
+        @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-wide;
+    }
+
+    .ui-badge {
+        @apply inline-block rounded-lg bg-primary-50 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-primary-600;
+    }
+
+    .ui-btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-primary-600 px-6 py-3 text-sm font-black text-white shadow-md shadow-primary-200 transition-all hover:bg-primary-700;
+    }
+
+    .ui-btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-surface-border bg-white px-6 py-3 text-sm font-bold text-ink transition-all hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700;
+    }
+
+    .ui-btn-ghost {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-bold text-ink-muted transition-colors hover:text-primary-600;
+    }
+
+    .ui-input {
+        @apply w-full rounded-2xl border-2 border-surface-border bg-white px-4 py-4 font-medium text-ink outline-none transition-all placeholder:text-ink-faint focus:border-primary-600;
+    }
+
+    .ui-topbar {
+        @apply sticky top-0 z-30 border-b border-surface-border bg-white/95 backdrop-blur;
+    }
+}
