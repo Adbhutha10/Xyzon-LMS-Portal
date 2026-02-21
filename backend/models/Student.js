@@ -20,6 +20,11 @@ const Student = sequelize.define('Student', {
             isEmail: true,
         },
     },
+    role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'student',
+    },
     password: {
         type: DataTypes.STRING,
         allowNull: false,

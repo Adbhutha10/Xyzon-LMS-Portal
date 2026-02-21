@@ -7,9 +7,10 @@ require('dotenv').config();
 const seedStudent = async () => {
     try {
         await connectDB();
-        await sequelize.sync();
+        await sequelize.sync({ alter: true });
 
         let testStudent = await Student.findOne({ where: { email: 'student@example.com' } });
+        let adminStudent = await Student.findOne({ where: { email: 'admin@example.com' } });
 
         if (!testStudent) {
             await Student.create({
@@ -21,6 +22,22 @@ const seedStudent = async () => {
             console.log('Test student created');
         } else {
             console.log('Test student already exists');
+        }
+
+        if (!adminStudent) {
+            await Student.create({
+                name: 'Admin User',
+                email: 'admin@example.com',
+                password: 'admin123',
+                role: 'admin',
+            });
+            console.log('Admin user created (admin@example.com / admin123)');
+        } else if (adminStudent.role !== 'admin') {
+            adminStudent.role = 'admin';
+            await adminStudent.save();
+            console.log('Existing admin user role corrected to admin');
+        } else {
+            console.log('Admin user already exists');
         }
 
         const courseCount = await Course.count({ where: { studentId: testStudent.id } });

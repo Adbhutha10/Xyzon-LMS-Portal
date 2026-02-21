@@ -5,7 +5,7 @@ const { Op } = require('sequelize');
 
 const signToken = (student) => {
     return jwt.sign(
-        { id: student.id, email: student.email },
+        { id: student.id, email: student.email, role: student.role },
         process.env.JWT_SECRET || 'secret',
         { expiresIn: '1d' }
     );
@@ -37,6 +37,7 @@ const signup = async (req, res) => {
                 id: student.id,
                 name: student.name,
                 email: student.email,
+                role: student.role,
             },
         });
     } catch (error) {
@@ -76,6 +77,7 @@ const login = async (req, res) => {
                 id: student.id,
                 name: student.name,
                 email: student.email,
+                role: student.role,
             },
         });
     } catch (error) {

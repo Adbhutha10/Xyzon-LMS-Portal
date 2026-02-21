@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LayoutDashboard, BookOpen, Settings, LogOut, Clock, ChevronRight, Flame, Trophy, Target, Loader2 } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Settings, LogOut, Clock, ChevronRight, Flame, Trophy, Target, Loader2, ShieldCheck } from 'lucide-react';
 import axios from 'axios';
 
 const DashboardPage = () => {
@@ -76,6 +76,7 @@ const DashboardPage = () => {
                     {[
                         { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard', active: true },
                         { icon: BookOpen, label: 'Browse Courses', path: '/courses', active: false },
+                        ...(student?.role === 'admin' ? [{ icon: ShieldCheck, label: 'Admin Panel', path: '/admin', active: false }] : []),
                         { icon: Settings, label: 'Settings', path: '#', active: false },
                     ].map(({ icon: Icon, label, path, active }) => (
                         <button
